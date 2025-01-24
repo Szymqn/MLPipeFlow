@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 
 class PipelineComponent(ABC):
     @abstractmethod
-    def execute(self, data):
+    def execute(self, **kwargs):
         pass

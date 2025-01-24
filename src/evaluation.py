@@ -1,13 +1,14 @@
 from abc import ABC
-from pipeline import PipelineComponent
+from src.pipeline import PipelineComponent
 from sklearn.metrics import accuracy_score
 
 
 class ModelEvaluation(PipelineComponent, ABC):
-    def __init__(self, model):
-        self.model = model
+    def __init__(self):
+        pass
 
-    def execute(self, data):
+    def execute(self, data, model):
+        print('Evaluating model...')
         features, target = data
-        predictions = self.model.predict(features)
+        predictions = model.predict(features)
         return accuracy_score(target, predictions)
