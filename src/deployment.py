@@ -15,3 +15,5 @@ class ModelDeployment(PipelineComponent, ABC):
         os.makedirs(os.path.dirname(self.model_path), exist_ok=True)
         with open(self.model_path, 'wb') as f:
             dump(model, f)
+
+        return self.model_path

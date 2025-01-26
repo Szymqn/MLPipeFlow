@@ -4,6 +4,7 @@ from src.training import ModelTraining
 from src.deployment import ModelDeployment
 from src.evaluation import ModelEvaluation
 from src.mlpipeline import MLPipeFlow
+from src.monitoring import Monitoring
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
         ModelTraining(model_name='random_forest'),
         ModelEvaluation(),
         ModelDeployment(model_path='model_example/model.pkl'),
+        Monitoring()
     ]
 
     pipeline = MLPipeFlow(components)

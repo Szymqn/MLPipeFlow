@@ -7,6 +7,7 @@ from src.deployment import ModelDeployment
 class MLPipeFlow:
     def __init__(self, components):
         self.components = components
+        self.model_path = None
 
     def run(self):
         data = None
@@ -17,9 +18,9 @@ class MLPipeFlow:
             elif isinstance(component, ModelEvaluation):
                 data = component.execute(data, model)
             elif isinstance(component, ModelDeployment):
-                data = component.execute(model)
+                self.model_path = component.execute(model)
             elif isinstance(component, Monitoring):
-                data = component.execute(data, model)
+                component.execute(self.model_path, data)
             else:
                 data = component.execute(data)
         return data

@@ -12,3 +12,4 @@ class ModelEvaluation(PipelineComponent, ABC):
         features, target = data
         predictions = model.predict(features)
         print("ACC: ", accuracy_score(target, predictions))
+        return data

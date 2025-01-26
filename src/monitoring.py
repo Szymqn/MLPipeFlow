@@ -14,8 +14,9 @@ class Monitoring(PipelineComponent, ABC):
         with open(model_path, 'rb') as f:
             model = load(f)
         print("Model: ", model)
+        features, target = data
         if hasattr(model, 'predict'):
-            predictions = model.predict(data)
+            predictions = model.predict(features)
             return predictions
         else:
             raise AttributeError(f"Loaded object from {self.model_path} does not have a 'predict' method.")
