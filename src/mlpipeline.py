@@ -1,3 +1,5 @@
+from src.preprocessing import DataPreprocessing
+from src.feature_engineering import FeatureEngineering
 from src.evaluation import ModelEvaluation
 from src.monitoring import Monitoring
 from src.training import ModelTraining
@@ -6,21 +8,26 @@ from src.deployment import ModelDeployment
 
 class MLPipeFlow:
     def __init__(self, components):
-        self.components = components
-        self.model_path = None
+        self._components = components
 
     def run(self):
+        global model_path, evaluation_results, monitoring_results
         data = None
         model = None
-        for component in self.components:
-            if isinstance(component, ModelTraining):
+        for component in self._components:
+            if isinstance(component, DataPreprocessing):
+                data = component.execute()
+            elif isinstance(component, FeatureEngineering):
+                data = component.execute(data)
+            elif isinstance(component, ModelTraining):
                 model = component.execute(data)
             elif isinstance(component, ModelEvaluation):
-                data = component.execute(data, model)
+                evaluation_results = component.execute(model, data)
             elif isinstance(component, ModelDeployment):
-                self.model_path = component.execute(model)
+                model_path = component.execute(model)
             elif isinstance(component, Monitoring):
-                component.execute(self.model_path, data)
-            else:
-                data = component.execute(data)
-        return data
+                monitoring_results = component.execute(model_path, data)
+        return {
+            'evaluation_results': evaluation_results,
+            'monitoring_results': monitoring_results
+        }
