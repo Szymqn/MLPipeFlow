@@ -21,11 +21,11 @@ from src.monitoring import Monitoring
 from src.mlpipeline import MLPipeFlow
 
 components = [
-    DataPreprocessing(data_path='path/to/data.csv'),
-    FeatureEngineering(target='target_column'),
-    ModelTraining(),
+    DataPreprocessing(data_path='test_data/exampleData_TCGA_LUAD_2000.csv'),
+    FeatureEngineering(target='class'),
+    ModelTraining(model_name='svm'),
     ModelEvaluation(),
-    ModelDeployment(),
+    ModelDeployment(model_path='model_example/model.pkl'),
     Monitoring()
 ]
 
