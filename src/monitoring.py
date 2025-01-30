@@ -1,7 +1,5 @@
 from abc import ABC
-
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
 from src.pipeline import PipelineComponent
 from pickle import load
 
@@ -18,7 +16,7 @@ class Monitoring(PipelineComponent, ABC):
         if hasattr(model, 'predict'):
             predictions = model.predict(features)
         else:
-            raise AttributeError(f"Loaded object from {self.model_path} does not have a 'predict' method.")
+            raise AttributeError(f"Loaded object from {model_path} does not have a 'predict' method.")
 
         acc_score = accuracy_score(target, predictions)
         precision = precision_score(target, predictions, average='binary')
