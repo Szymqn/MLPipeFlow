@@ -66,6 +66,12 @@ Handles monitoring of the deployed model.
 - **Methods**:
   - `execute(model_path, data)`: Monitors the deployed model.
 
+## Technologies Used
+- Python
+- scikit-learn
+- pandas
+- NumPy
+
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any changes.
 
