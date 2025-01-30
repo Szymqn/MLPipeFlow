@@ -11,7 +11,7 @@ def main():
     components = [
         DataPreprocessing(data_path='test_data/exampleData_TCGA_LUAD_2000.csv'),
         FeatureEngineering(target='class'),
-        ModelTraining(model_name='random_forest'),
+        ModelTraining(model_name='svm'),
         ModelEvaluation(),
         ModelDeployment(model_path='model_example/model.pkl'),
         Monitoring()
